@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Data | {{ block.super   }}{% endblock title %}
+
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+
+{% block content %}
+
+{{ data }}
+
+<!-- <table class="table table-bordered table-striped"> -->
+
+<!--  {% for key, value in data.items %} -->
+<!--     <tr> -->
+<!--         <th>{{ key }}</th> -->
+<!--         <td>{{ value }}</td> -->
+<!--     </tr> -->
+<!-- {% endfor %} -->
+
+
+    <!-- {% for item in data.items %} -->
+    <!-- <tr> -->
+    <!--     <th>{{ item.key }}</th> -->
+    <!--     <td>{{ item.attribute }}</td> -->
+    <!-- </tr> -->
+    <!-- {% endfor %} -->
+</table>
+
+<!-- <ul> -->
+<!--     {% for key, value in data.items %} -->
+<!--     <li>{{ key }} - {{ value }}</li> -->
+<!--     {% endfor %} -->
+<!-- </ul> -->
+
+<!-- <ul> -->
+<!--     {% for item in data %} -->
+<!--         {% for item2 in item.items %} -->
+<!--         <li>{{ item2 }}</li> -->
+<!--         {% endfor %} -->
+<!--     {% endfor %} -->
+<!-- </ul> -->
+
+<!-- {% for key, value in data.items %} -->
+<!-- {{ key  }} : {{ value  }} -->
+<!-- {% endfor %} -->
+
+<!-- <ul> -->
+<!--     {% for item in data %} -->
+<!--     <li> {{ item  }} {{ item.attribute  }} </li> -->
+<!--     {% endfor %} -->
+<!-- </ul> -->
+
+
+{% endblock content %}
