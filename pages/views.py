@@ -60,6 +60,7 @@ def radar(request):
             })
 
     data_literacy = {"labels": labels, "datasets": datasets}
+
     data_literacy = gsheets.json.dumps(data_literacy, sort_keys=True, indent=4)
     # print(gsheets.json.dumps(data_literacy, sort_keys=True, indent=4))
 
