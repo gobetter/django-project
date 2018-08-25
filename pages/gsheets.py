@@ -1,6 +1,12 @@
-import requests # pipenv install requests -> http://docs.python-requests.org/en/master/
+import requests
 import pprint
+import json
 
+from statistics import mean
+from collections import OrderedDict
+
+from . import utils
+from . import gsheets
 
 class WorkSheet():
     def __init__(self,sheet_id):
@@ -16,8 +22,8 @@ class WorkSheet():
         for item in json_dict['feed']['entry']:
             self.sheet.append(Sheet(item))
 
-    def get_list(self):
-        return [self.url, self.title, self.sheet_count]
+    def get_info_list(self):
+        return [self.title, self.sheet_count, self.url]
 
 
 class Sheet():
@@ -36,9 +42,47 @@ class Sheet():
         for item in sheet_json_dict['feed']['entry']:
             self.questionnaire.append(Questionnaire(item))
 
-    def get_list(self):
+    def get_info_list(self):
         return [self.title, self.col_count, self.row_count, self.url]
 
+    # def get_experience_list(self):
+    #     merged_list = []
+    #     for lst in self.questionnaire:
+    #         merged_list = merged_list + lst.get_experience_list()
+    #     return merged_list
+
+    # def get_exclusive_list(self):
+    #     merged_list = []
+    #     for lst in self.questionnaire:
+    #         merged_list = merged_list + lst.get_exclusive_list()
+    #     return merged_list
+
+    # def get_expertise_list(self):
+    #     merged_list = []
+    #     for lst in self.questionnaire:
+    #         merged_list = merged_list + lst.get_expertise_list()
+    #     return merged_list
+
+    # def get_exceptional_list(self):
+    #     merged_list = []
+    #     for lst in self.questionnaire:
+    #         merged_list = merged_list + lst.get_exceptional_list()
+    #     return merged_list
+
+    # def get_excellence_list(self):
+    #     merged_list = []
+    #     for lst in self.questionnaire:
+    #         merged_list = merged_list + lst.get_excellence_list()
+    #     return merged_list
+
+    def filter_by_location_list(self, location):
+        filtered_list = [q for q in self.questionnaire if q.ans_location == location]
+
+        return filtered_list
+
+    def filter_by_location_generator(self, location):
+        for el in self.questionnaire:
+            if el.ans_location==location: yield el
 
 class Questionnaire():
     def __init__(self, json_dict):
@@ -217,40 +261,35 @@ class Questionnaire():
         self.ans_exceptional  = json_dict['gsx$ansexceptional']['$t']
         self.ans_excellence   = json_dict['gsx$ansexcellence']['$t']
 
-    def get_experience_summary(self):
-        summary = self.ans_1_1_1 + self.ans_1_1_2 + self.ans_1_1_3 + self.ans_1_1_4 + self.ans_1_1_5 + self.ans_1_1_6 + self.ans_1_1_7 + self.ans_1_1_8 + self.ans_1_1_9 + self.ans_1_1_10 + self.ans_1_1_11 + self.ans_1_1_12 + self.ans_1_1_13 +  self.ans_1_1_14 + self.ans_1_1_15 + self.ans_1_1_16 + self.ans_1_1_17 + self.ans_1_1_18 + self.ans_1_1_19 + self.ans_1_1_20
-        + self.ans_1_2_1 + self.ans_1_2_2 + self.ans_1_2_3 + self.ans_1_2_4 + self.ans_1_2_5 + self.ans_1_2_6 + self.ans_1_2_7 + self.ans_1_2_8 + self.ans_1_2_9 + self.ans_1_2_10 + self.ans_1_2_11 
-        + self.ans_1_3_1 + self.ans_1_3_2 + self.ans_1_3_3 + self.ans_1_3_4 
-        + self.ans_1_4_1 + self.ans_1_4_2 + self.ans_1_4_3 + self.ans_1_4_4 
-        + self.ans_1_5_1 + self.ans_1_5_2 
-        + self.ans_1_6_1 + self.ans_1_6_2 + self.ans_1_6_3 + self.ans_1_6_4
-        return (summary)
+    def get_experience_list(self):
+        return ([self.ans_1_1_1 , self.ans_1_1_2 , self.ans_1_1_3 , self.ans_1_1_4 , self.ans_1_1_5 , self.ans_1_1_6 , self.ans_1_1_7 , self.ans_1_1_8 , self.ans_1_1_9 , self.ans_1_1_10 , self.ans_1_1_11 , self.ans_1_1_12 , self.ans_1_1_13 , self.ans_1_1_14 , self.ans_1_1_15 , self.ans_1_1_16 , self.ans_1_1_17 , self.ans_1_1_18 , self.ans_1_1_19 , self.ans_1_1_20
+        , self.ans_1_2_1 , self.ans_1_2_2 , self.ans_1_2_3 , self.ans_1_2_4 , self.ans_1_2_5 , self.ans_1_2_6 , self.ans_1_2_7 , self.ans_1_2_8 , self.ans_1_2_9 , self.ans_1_2_10 , self.ans_1_2_11 
+        , self.ans_1_3_1 , self.ans_1_3_2 , self.ans_1_3_3 , self.ans_1_3_4 
+        , self.ans_1_4_1 , self.ans_1_4_2 , self.ans_1_4_3 , self.ans_1_4_4 
+        , self.ans_1_5_1 , self.ans_1_5_2 
+        , self.ans_1_6_1 , self.ans_1_6_2 , self.ans_1_6_3 , self.ans_1_6_4])
 
-    def get_exclusive_summary(self):
-        summary = self.ans_2_1_1 + self.ans_2_1_2 + self.ans_2_1_3 + self.ans_2_1_4 + self.ans_2_1_5 + self.ans_2_1_6
-        + self.ans_2_2_1 + self.ans_2_2_2 + self.ans_2_2_3 + self.ans_2_2_4 + self.ans_2_2_5 + self.ans_2_2_6 + self.ans_2_2_7
-        return (summary)
+    def get_exclusive_list(self):
+        return([self.ans_2_1_1 , self.ans_2_1_2 , self.ans_2_1_3 , self.ans_2_1_4 , self.ans_2_1_5 , self.ans_2_1_6
+            , self.ans_2_2_1 , self.ans_2_2_2 , self.ans_2_2_3 , self.ans_2_2_4 , self.ans_2_2_5 , self.ans_2_2_6 , self.ans_2_2_7])
 
-    def get_expertise_summary(self):
-        summary = self.ans_3_1_1 + self.ans_3_1_2 + self.ans_3_1_3 + self.ans_3_1_4 + self.ans_3_1_5 
-        + self.ans_3_2_1 + self.ans_3_2_2 + self.ans_3_2_3
-        return (summary)
+    def get_expertise_list(self):
+        return ([self.ans_3_1_1 , self.ans_3_1_2 , self.ans_3_1_3 , self.ans_3_1_4 , self.ans_3_1_5 
+        , self.ans_3_2_1 , self.ans_3_2_2 , self.ans_3_2_3])
 
-    def get_exclusive_summary(self):
-        summary = self.ans_4_1_1 + self.ans_4_1_2 + self.ans_4_1_3 + self.ans_4_1_4 + self.ans_4_1_5 + self.ans_4_1_6 + self.ans_4_1_7 + self.ans_4_1_8 + self.ans_4_1_9 + self.ans_4_1_10 + self.ans_4_1_11 + self.ans_4_1_12 + self.ans_4_1_13 + self.ans_4_1_14 + self.ans_4_1_15 + self.ans_4_1_16 + self.ans_4_1_17
-        + self.ans_4_2_1 + self.ans_4_2_2 + self.ans_4_2_3 + self.ans_4_2_4 + self.ans_4_2_5 + self.ans_4_2_6 + self.ans_4_2_7 + self.ans_4_2_8 + self.ans_4_2_9 + self.ans_4_2_10 + self.ans_4_2_11 
-        + self.ans_4_3_1 + self.ans_4_3_2 + self.ans_4_3_3 + self.ans_4_3_4 + self.ans_4_3_5 + self.ans_4_3_6 + self.ans_4_3_7 + self.ans_4_3_8 + self.ans_4_3_9 + self.ans_4_3_10
-        + self.ans_4_4_1 + self.ans_4_4_2
-        + self.ans_4_5_1 + self.ans_4_5_2 + self.ans_4_5_3 + self.ans_4_5_4 + self.ans_4_5_5 + self.ans_4_5_6
-        + self.ans_4_6_1 + self.ans_4_6_2 + self.ans_4_6_3 + self.ans_4_6_4 + self.ans_4_6_5 + self.ans_4_6_6
-        return (summary)
+    def get_exceptional_list(self):
+        return ([self.ans_4_1_1 , self.ans_4_1_2 , self.ans_4_1_3 , self.ans_4_1_4 , self.ans_4_1_5 , self.ans_4_1_6 , self.ans_4_1_7 , self.ans_4_1_8 , self.ans_4_1_9 , self.ans_4_1_10 , self.ans_4_1_11 , self.ans_4_1_12 , self.ans_4_1_13 , self.ans_4_1_14 , self.ans_4_1_15 , self.ans_4_1_16 , self.ans_4_1_17
+        , self.ans_4_2_1 , self.ans_4_2_2 , self.ans_4_2_3 , self.ans_4_2_4 , self.ans_4_2_5 , self.ans_4_2_6 , self.ans_4_2_7 , self.ans_4_2_8 , self.ans_4_2_9 , self.ans_4_2_10 , self.ans_4_2_11 
+        , self.ans_4_3_1 , self.ans_4_3_2 , self.ans_4_3_3 , self.ans_4_3_4 , self.ans_4_3_5 , self.ans_4_3_6 , self.ans_4_3_7 , self.ans_4_3_8 , self.ans_4_3_9 , self.ans_4_3_10
+        , self.ans_4_4_1 , self.ans_4_4_2
+        , self.ans_4_5_1 , self.ans_4_5_2 , self.ans_4_5_3 , self.ans_4_5_4 , self.ans_4_5_5 , self.ans_4_5_6
+        , self.ans_4_6_1 , self.ans_4_6_2 , self.ans_4_6_3 , self.ans_4_6_4 , self.ans_4_6_5 , self.ans_4_6_6])
 
-    def get_exceptional_summary(self):
-        summary = self.ans_5_1_1 + self.ans_5_1_2 + self.ans_5_1_3 + self.ans_5_1_4
-        + self.ans_5_2_1 + self.ans_5_2_2 + self.ans_5_2_3 + self.ans_5_2_4 
-        + self.ans_5_3_1 + self.ans_5_3_2 + self.ans_5_3_3 + self.ans_5_3_4 + self.ans_5_3_5 + self.ans_5_3_6 + self.ans_5_3_7
-        + self.ans_5_4_1 + self.ans_5_4_2 + self.ans_5_4_3 + self.ans_5_4_4
-        return (summary)
+    def get_excellence_list(self):
+        return ([self.ans_5_1_1 , self.ans_5_1_2 , self.ans_5_1_3 , self.ans_5_1_4
+        , self.ans_5_2_1 , self.ans_5_2_2 , self.ans_5_2_3 , self.ans_5_2_4 
+        , self.ans_5_3_1 , self.ans_5_3_2 , self.ans_5_3_3 , self.ans_5_3_4 , self.ans_5_3_5 , self.ans_5_3_6 , self.ans_5_3_7
+        , self.ans_5_4_1 , self.ans_5_4_2 , self.ans_5_4_3 , self.ans_5_4_4])
 
     def get_scale_points(self, val):
         switcher = {
@@ -260,9 +299,16 @@ class Questionnaire():
                 'น้อย'       :2,
                 'น้อยที่สุด'    :1
                 }
-        return switcher.get(val, "Invalid scale value")
+        return switcher.get(val, "ไม่ได้ตอบ")
 
-    def get_list(self):
+    def get_info_list(self):
+        return([
+            self.ans_location,
+            self.ans_assessor,
+            self.ans_timestamp,
+            ])
+
+    def get_all_list(self):
         return([
             self.ans_timestamp,
             self.ans_location,
@@ -440,34 +486,135 @@ class Questionnaire():
             self.ans_excellence,
             ])
 
+def get_experience_list(q):
+    merged_list = []
+    for lst in q:
+        merged_list = merged_list + lst.get_experience_list()
+    return merged_list
 
-def filter_by_location(seq, location):
-    for el in seq:
-        if el.ans_location==location: yield el
+
+def get_exclusive_list(q):
+    merged_list = []
+    for lst in q:
+        merged_list = merged_list + lst.get_exclusive_list()
+    return merged_list
+
+def get_expertise_list(q):
+    merged_list = []
+    for lst in q:
+        merged_list = merged_list + lst.get_expertise_list()
+    return merged_list
+
+def get_exceptional_list(q):
+    merged_list = []
+    for lst in q:
+        merged_list = merged_list + lst.get_exceptional_list()
+    return merged_list
+
+def get_excellence_list(q):
+    merged_list = []
+    for lst in q:
+        merged_list = merged_list + lst.get_excellence_list()
+    return merged_list
+
+# def filter_by_location(seq, location):
+#     for el in seq:
+#         if el.ans_location==location: yield el
 
 
 hvd_tourguide = WorkSheet('1fSMVe883ATrG14noEwaDJ7uSDzt6YFOLrMMLPT0ELH0')
 
-# pprint.pprint(hvd_tourguide.sheet[0].get_list())
-# pprint.pprint(hvd_tourguide.sheet[1].get_list())
-
-# pprint.pprint(hvd_tourguide.sheets[0].questionnaire.documents[0].get_set())
-# print(hvd_tourguide.sheets[0].questionnaire.documents[1].get_set())
-# print(len(hvd_tourguide.sheets[0].questionnaire.documents))
-# print(hvd_tourguide.sheets[0].questionnaire.document_count)
-# pprint.pprint(type(hvd_tourguide.sheet[0].questionnaire.documents()))
-
-# pprint.pprint(hvd_tourguide.sheet[0].questionnaire[0].get_list())
-
 # filtered = list(filter_by_location(hvd_tourguide.sheet[0].questionnaire, 'เกาะรอก'))
-# print(len(filtered))
-# print(filtered[0].ans_assessor)
-# print(filtered[1].ans_assessor)
-# print(filtered[2].ans_assessor)
+# pprint.pprint(hvd_tourguide.sheet[0].questionnaire.filter_by_location('เกาะรอก'))
 
-pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].ans_assessor)
-pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].get_experience_summary())
-pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].get_exclusive_summary())
-pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].get_expertise_summary())
-pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].get_exceptional_summary())
-# pprint.pprint(hvd_tourguide.sheet[0].questionnaire[1].get_excellence_summary())
+# print(mean(hvd_tourguide.sheet[0].get_experience_list()))
+# print(mean(hvd_tourguide.sheet[0].get_exclusive_list()))
+# print(mean(hvd_tourguide.sheet[0].get_expertise_list()))
+# print(mean(hvd_tourguide.sheet[0].get_exceptional_list()))
+# print(mean(hvd_tourguide.sheet[0].get_excellence_list()))
+
+# print(mean(get_experience_list(hvd_tourguide.sheet[0].questionnaire)))
+# print(mean(get_exclusive_list(hvd_tourguide.sheet[0].questionnaire)))
+# print(mean(get_expertise_list(hvd_tourguide.sheet[0].questionnaire)))
+# print(mean(get_exceptional_list(hvd_tourguide.sheet[0].questionnaire)))
+# print(mean(get_excellence_list(hvd_tourguide.sheet[0].questionnaire)))
+
+# print('------------------ สระมรกต ----------------------------------')
+
+# filtered = hvd_tourguide.sheet[0].filter_by_location_list('สระมรกต')
+# print(mean(get_experience_list(filtered)))
+# print(mean(get_exclusive_list(filtered)))
+# print(mean(get_expertise_list(filtered)))
+# print(mean(get_exceptional_list(filtered)))
+# print(mean(get_excellence_list(filtered)))
+
+# print('-----------------------------------------------------')
+
+location_names =[item.ans_location for item in hvd_tourguide.sheet[0].questionnaire]
+location_names_ordered = list(OrderedDict.fromkeys(location_names))
+
+# pprint.pprint('[%s]' % ', '.join(map(str, location_names)))
+# pprint.pprint('[%s]' % ', '.join(map(str, set(location_names))))
+# pprint.pprint('[%s]' % ', '.join(map(str, location_names_ordered)))
+
+# for location in location_names_ordered:
+#     filtered = hvd_tourguide.sheet[0].filter_by_location_list(location)
+
+#     print('---------- ' + location + ' ----------')
+#     print(mean(get_experience_list(filtered)))
+#     print(mean(get_exclusive_list(filtered)))
+#     print(mean(get_expertise_list(filtered)))
+#     print(mean(get_exceptional_list(filtered)))
+#     print(mean(get_excellence_list(filtered)))
+
+
+labels = ["Experience", "Exclusive", "Expertise", "Exceptional", "Excellence"]
+data = []
+
+for location in location_names_ordered:
+    filtered = hvd_tourguide.sheet[0].filter_by_location_list(location)
+
+    print('---------- ' + location + ' ----------')
+    print(mean(gsheets.get_experience_list(filtered)))
+    print(mean(gsheets.get_exclusive_list(filtered)))
+    print(mean(gsheets.get_expertise_list(filtered)))
+    print(mean(gsheets.get_exceptional_list(filtered)))
+    print(mean(gsheets.get_excellence_list(filtered)))
+
+    data.append([location, [
+        mean(gsheets.get_experience_list(filtered)),
+        mean(gsheets.get_exclusive_list(filtered)),
+        mean(gsheets.get_expertise_list(filtered)),
+        mean(gsheets.get_exceptional_list(filtered)),
+        mean(gsheets.get_excellence_list(filtered))
+        ]])
+
+datasets = []
+
+for d in data:
+    datasets.append({
+        "label": d[0], 
+        "fill": True, 
+        "backgroundColor": "rgba(179,181,198,0.2)",
+        "borderColor": "rgb(54,162,235)",
+        "pointBorderColor": "#fff",
+        "pointBackgroundColor": "rgba(179,181,198,1)",
+        "data": d[1]
+        })
+
+print('---------------------------------------------')
+
+pprint.pprint(type(datasets))
+pprint.pprint(type(datasets[1]))
+pprint.pprint(datasets[1])
+print(json.dumps(datasets[1], sort_keys=True, indent=4))
+# pprint.pprint(json.dumps(datasets[1]))
+# pprint.pprint(json.loads(json.dumps(datasets[1])))
+
+print('---------------------------------------------')
+
+dataLiteracy = {"labels": labels, "datasets": datasets}
+pprint.pprint(type(dataLiteracy))
+pprint.pprint(dataLiteracy)
+
+print('---------------------------------------------')

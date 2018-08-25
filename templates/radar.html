@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Radar Chart | {{ block.super   }}{% endblock title %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <canvas id="radar-chart" width="800" height="600"></canvas>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+        <script src="{% static 'js/Chart.bundle.min.js' %}"></script>
+
+        <script>
+            var options = {
+                title: {
+                    display: true,
+                    text: 'High Value Destinations',
+                    fontSize: 20
+                  },
+                legend: {
+                    //display: true,
+                    labels: {
+                        //fontColor: 'rgb(255, 99, 132)',
+                        fontSize: 18,
+                     }
+                },
+                responsive: false,
+                maintainAspectRatio: true,
+                scale: {
+                    pointLabels: {
+                        fontSize: 16
+                        },
+                    ticks: {
+                     //   beginAtZero: true,
+                        max: 5,
+                        min: 0,
+                        stepSize: 0.5
+                    }
+                }
+            };
+
+            var dataLiteracy = {{ data_literacy|safe }};
+
+            var ctx = document.getElementById("radar-chart");
+            var myRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: dataLiteracy,
+                options: options
+            });
+        </script>
+{% endblock %}

@@ -2,10 +2,11 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from pages.views import HomeView, json
+from pages.views import HomeView, json, radar
 
 urlpatterns = [
         path('data/', json, name='data'),
+        path('radar/', radar, name='radar'),
 
         path('', HomeView.as_view(), name='home'),
         path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
