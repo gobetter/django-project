@@ -10,9 +10,7 @@
 {% block content %}
 
 <div class="content">
-    {% for canvase_name in canvase_names %}
-    <canvas id="{{ canvase_name.name }}" width="800" height="600"></canvas>
-    {% endfor %}
+    <canvas id="radar-chart" width="800" height="600"></canvas>
 </div>
 
 {% endblock %}
@@ -20,5 +18,5 @@
 {% block js_extend %}
     <script src="{% static 'js/Chart.bundle.min.js' %}"></script>
 
-    {% include 'includes/radarscript.html' %}
+    {% include 'includes/radarscriptall.html' %}
 {% endblock %}

@@ -1,8 +1,7 @@
-    {% for canvase_name, data_literacy in data %}
         <script>
             var options = {
                 title: {
-                    display: false,
+                    display: true,
                     text: 'High Value Destinations',
                     fontSize: 20
                   },
@@ -30,12 +29,11 @@
 
             var dataLiteracy = {{ data_literacy|safe }};
 
-            var ctx = document.getElementById('{{ canvase_name.name }}');
+            var ctx = document.getElementById("radar-chart");
             var myRadarChart = new Chart(ctx, {
                 type: 'radar',
                 data: dataLiteracy,
                 options: options
             });
         </script>
-        {% endfor %}
-
+ 
