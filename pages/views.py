@@ -66,18 +66,8 @@ def radar_all_data(hvd):
     data_literacy = {"labels": labels, "datasets": datasets}
 
     data_literacy = questionnaire.json.dumps(data_literacy, sort_keys=True, indent=4)
-    # print(gsheets.json.dumps(data_literacy, sort_keys=true, indent=4))
 
     return {'data_literacy': data_literacy}
-
-def radar_all_tourguide(request):
-    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.TourGuide, questionnaire.sheet_url_tourguide)))
-
-def radar_all_accommudation(request):
-    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.Accommudation, questionnaire.sheet_url_accommudation)))
-
-def radar_all_cultural(request):
-    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.Cultural, questionnaire.sheet_url_cultural)))
 
 def radar_individual_data(hvd):
     location_names =[q.location for q in hvd.questionnaires]
@@ -118,6 +108,15 @@ def radar_individual_data(hvd):
         data_literacies.append(data_literacy)
 
     return {'canvase_names': canvase_names, 'data': zip(canvase_names, data_literacies)}
+
+def radar_all_tourguide(request):
+    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.TourGuide, questionnaire.sheet_url_tourguide)))
+
+def radar_all_accommudation(request):
+    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.Accommudation, questionnaire.sheet_url_accommudation)))
+
+def radar_all_cultural(request):
+    return render(request, "radar/radarall.html", radar_all_data(questionnaire.Questionnaires(questionnaire.Cultural, questionnaire.sheet_url_cultural)))
 
 def radar_individual_tourguide(request):
     return render(request, "radar/radar.html", radar_individual_data(questionnaire.Questionnaires(questionnaire.TourGuide, questionnaire.sheet_url_tourguide)))
