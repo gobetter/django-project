@@ -13,7 +13,7 @@
                         fontSize: 18,
                      }
                 },
-                responsive: false,
+                responsive: true,
                 maintainAspectRatio: true,
                 scale: {
                     pointLabels: {
@@ -31,6 +31,8 @@
             var dataLiteracy = {{ data_literacy|safe }};
 
             var ctx = document.getElementById('{{ canvase_name.name }}');
+            ctx.height = 300;
+
             var myRadarChart = new Chart(ctx, {
                 type: 'radar',
                 data: dataLiteracy,

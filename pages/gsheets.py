@@ -86,17 +86,17 @@ class Sheet():
 
 class Questionnaire():
     def __init__(self, json_dict):
-        self.ans_timestamp               = json_dict['gsx$anstimestamp']['$t']
-        self.ans_location                = json_dict['gsx$anslocation']['$t']
-        self.ans_assessor                = json_dict['gsx$ansassessor']['$t']
-        self.ans_gender                  = json_dict['gsx$ansgender']['$t']
-        self.ans_age                     = json_dict['gsx$ansage']['$t']
-        self.ans_income                  = json_dict['gsx$ansincome']['$t']
-        self.ans_education               = json_dict['gsx$anseducation']['$t']
-        self.ans_carreer                 = json_dict['gsx$anscarreer']['$t']
-        self.ans_marital_status          = json_dict['gsx$ansmaritalstatus']['$t']
-        self.ans_region                  = json_dict['gsx$ansregion']['$t']
-        self.ans_best_tourist_attraction = json_dict['gsx$ansbesttouristattraction']['$t']
+        self.ans_timestamp               = json_dict['gsx$timestamp']['$t']
+        self.ans_location                = json_dict['gsx$location']['$t']
+        self.ans_assessor                = json_dict['gsx$assessor']['$t']
+        self.ans_gender                  = json_dict['gsx$gender']['$t']
+        self.ans_age                     = json_dict['gsx$age']['$t']
+        self.ans_income                  = json_dict['gsx$income']['$t']
+        self.ans_education               = json_dict['gsx$education']['$t']
+        self.ans_carreer                 = json_dict['gsx$carreer']['$t']
+        self.ans_marital_status          = json_dict['gsx$maritalstatus']['$t']
+        self.ans_region                  = json_dict['gsx$region']['$t']
+        self.ans_best_tourist_attraction = json_dict['gsx$besttouristattraction']['$t']
 
         self.ans_1_1_1  = self.get_scale_points(json_dict['gsx$ans111' ]['$t'])
         self.ans_1_1_2  = self.get_scale_points(json_dict['gsx$ans112' ]['$t'])
@@ -255,11 +255,11 @@ class Questionnaire():
         self.ans_5_4_3  = self.get_scale_points(json_dict['gsx$ans543']['$t'])
         self.ans_5_4_4  = self.get_scale_points(json_dict['gsx$ans544']['$t'])
 
-        self.ans_experience   = json_dict['gsx$ansexperience']['$t']
-        self.ans_exclusive    = json_dict['gsx$ansexclusive']['$t']
-        self.ans_expertise    = json_dict['gsx$ansexpertise']['$t']
-        self.ans_exceptional  = json_dict['gsx$ansexceptional']['$t']
-        self.ans_excellence   = json_dict['gsx$ansexcellence']['$t']
+        self.ans_experience   = json_dict['gsx$experience']['$t']
+        self.ans_exclusive    = json_dict['gsx$exclusive']['$t']
+        self.ans_expertise    = json_dict['gsx$expertise']['$t']
+        self.ans_exceptional  = json_dict['gsx$exceptional']['$t']
+        self.ans_excellence   = json_dict['gsx$excellence']['$t']
 
     def get_experience_list(self):
         return ([self.ans_1_1_1 , self.ans_1_1_2 , self.ans_1_1_3 , self.ans_1_1_4 , self.ans_1_1_5 , self.ans_1_1_6 , self.ans_1_1_7 , self.ans_1_1_8 , self.ans_1_1_9 , self.ans_1_1_10 , self.ans_1_1_11 , self.ans_1_1_12 , self.ans_1_1_13 , self.ans_1_1_14 , self.ans_1_1_15 , self.ans_1_1_16 , self.ans_1_1_17 , self.ans_1_1_18 , self.ans_1_1_19 , self.ans_1_1_20

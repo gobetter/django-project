@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% block title %}Data | {{ block.super   }}{% endblock title %}
+
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+
+{% block content %}
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr align="center">
+            <td rowspan="3" class="text-nowrap">ประทับเวลา</td>
+            <td rowspan="3" class="text-nowrap">แหล่งท่องเที่ยว</td>
+            <td rowspan="3" class="text-nowrap">ผู้ประเมิน</td>
+            <td rowspan="3" class="text-nowrap">เพศ</td>
+            <td rowspan="3" class="text-nowrap">อายุ</td>
+            <td rowspan="3" class="text-nowrap">รายได้ต่อเดือนของท่าน</td>
+            <td rowspan="3" class="text-nowrap">ระดับการศึกษา</td>
+            <td rowspan="3" class="text-nowrap">อาชีพหลัก</td>
+            <td rowspan="3" class="text-nowrap">สถานภาพสมรส</td>
+            <td rowspan="3" class="text-nowrap">ภูมิลำเนา</td>
+            <td rowspan="3" class="text-nowrap">กิจกรรมท่องเที่ยวแบบไหนที่คุณชอบมากที่สุด</td>
+            <td colspan="44">ประเภทที่ 1 แหล่งท่องเที่ยวที่นำเสนอประสบการณ์ (Experience)</td>
+            <td colspan="8">ประเภทที่ 2 การนำเที่ยวมีความพิเศษเฉพาะตัว (Exclusive)</td>
+            <td colspan="6">ประเภทที่ 3 การนำเที่ยวที่ดำเนินงานโดยผู้ที่มีความเชี่ยวชาญพิเศษ (Expertise)</td>
+            <td colspan="52">ประเภทที่ 4 แหล่งท่องเที่ยวที่มีมาตรฐานที่ได้รับการยอมรับ (Exceptional)</td>
+            <td colspan="19">ประเภทที่ 5 แหล่งท่องเที่ยวที่มีความยอดเยี่ยม (Excellence)</td>
+            <td colspan="5">ข้อเสนอแนะเพิ่มเติมเกี่ยวกับการพัฒนาตัวชี้วัดแหล่งท่องเที่ยวคุณค่าสูง</td>
+        </tr>
+        <tr align="center">
+            <td colspan="18">ด้านที่ 1.1 เสน่ห์ดึงดูดใจ</td>
+            <td colspan="11">ด้านที่ 1.2 คุณค่าความแปลกใหม่ของที่พัก</td>
+            <td colspan="4">ด้านที่ 1.3 ความเป็นมิตรของคนในพื้นที่</td>
+            <td colspan="4">ด้านที่ 1.4 มนต์ขลังน่าค้นหา</td>
+            <td colspan="3">ด้านที่ 1.5 มีความหลากหลายของศิลปวัฒนธรรมและสถาปัตยกรรม</td>
+            <td colspan="4">ด้านที่ 1.6 เน้นคุณค่าของการท่องเที่ยว</td>
+
+            <td colspan="3">ด้านที่ 2.1 ความเป็นเอกลักษณ์เฉพาะของที่พัก</td>
+            <td colspan="5">ด้านที่ 2.2 ความเป็นส่วนตัวในการพักผ่อน</td>
+
+            <td colspan="4">ด้านที่ 3.1 ความรู้และความเชี่ยวชาญ</td>
+            <td colspan="2">ด้านที่ 3.2 บทบาทความรับผิดชอบ ความรู้และประสบการณ์ของพนักงาน</td>
+
+            <td colspan="7">ด้านที่ 4.1 การจัดการด้านความปลอดภัยต่อชีวิต ทรัพย์สิน และสุขภาพของนักท่องเที่ยว ตลอดจนผู้เกี่ยวข้อง</td>
+            <td colspan="8">ด้านที่ 4.2 ด้านการบริหารจัดการ</td>
+            <td colspan="10">ด้านที่ 4.3 การบริการนักท่องเที่ยว</td>
+            <td colspan="2">ด้านที่ 4.4 การบริการข้อมูลข่าวสารนักท่องเที่ยว</td>
+            <td colspan="5">ด้านที่ 4.5 สิ่งอำนวยความสะดวกขั้นพื้นฐาน</td>
+            <td colspan="6">ด้านที่ 4.6 การคมนาคมขนส่ง</td>
+            <td colspan="4">ด้านที่ 4.7 ด้านการเป็นสมาชิกที่ดีของชุมชน</td>
+            <td colspan="10">ด้านที่ 4.8 ด้านระบบนิเวศ การใช้ทรัพยากร การอนุรักษ์สิ่งแวดล้อม การใช้พลังงานและลดภาวะโลกร้อน</td>
+
+            <td colspan="4">ด้านที่ 5.1 สภาพแวดล้อมของที่พัก</td>
+            <td colspan="4">ด้านที่ 5.2 การบริการของเจ้าหน้าที่่่่่</td>
+            <td colspan="7">ด้านที่ 5.3 บทบาทในการอนุรักษ์สิ่งแวดล้อมของบริเวณที่พักและกิจกรรมการอนุรักษ์</td>
+            <td colspan="4">ด้านที่ 5.4 การส่งเสริมศิลปวัฒนธรรม วิถีชีวิตและเอกลักษณ์ของท้องถิ่นรวมทั้งการสนับสนุนเศรษฐกิจท้องถิ่น</td>
+
+            <td rowspan="2" class="text-nowrap">1. แหล่งท่องเที่ยวที่นำเสนอประสบการณ์ (Experience)</td>
+            <td rowspan="2" class="text-nowrap">2. ความพิเศษเฉพาะตัวของแหล่งท่องเที่ยว (Exclusive)</td>
+            <td rowspan="2" class="text-nowrap">3. แหล่งท่องเที่ยวที่ดำเนินงานโดยผู้ที่มีความเชี่ยวชาญพิเศษ (Expertise)</td>
+            <td rowspan="2" class="text-nowrap">4. แหล่งท่องเที่ยวที่มีมาตรฐานที่ได้รับการยอมรับ (Exceptional)</td>
+            <td rowspan="2" class="text-nowrap">5. แหล่งท่องเที่ยวที่มีความยอดเยี่ยม (Excellence)</td>
+        </tr>
+        <tr align="center">
+            <td>1.1.1</td>
+            <td>1.1.2</td>
+            <td>1.1.3</td>
+            <td>1.1.4</td>
+            <td>1.1.5</td>
+            <td>1.1.6</td>
+            <td>1.1.7</td>
+            <td>1.1.8</td>
+            <td>1.1.9</td>
+            <td>1.1.10</td>
+            <td>1.1.11</td>
+            <td>1.1.12</td>
+            <td>1.1.13</td>
+            <td>1.1.14</td>
+            <td>1.1.15</td>
+            <td>1.1.16</td>
+            <td>1.1.17</td>
+            <td>1.1.18</td>
+
+            <td>1.2.1</td>
+            <td>1.2.2</td>
+            <td>1.2.3</td>
+            <td>1.2.4</td>
+            <td>1.2.5</td>
+            <td>1.2.6</td>
+            <td>1.2.7</td>
+            <td>1.2.8</td>
+            <td>1.2.9</td>
+            <td>1.2.10</td>
+            <td>1.2.11</td>
+
+            <td>1.3.1</td>
+            <td>1.3.2</td>
+            <td>1.3.3</td>
+            <td>1.3.4</td>
+
+            <td>1.4.1</td>
+            <td>1.4.2</td>
+            <td>1.4.3</td>
+            <td>1.4.4</td>
+
+            <td>1.5.1</td>
+            <td>1.5.2</td>
+            <td>1.5.3</td>
+
+            <td>1.6.1</td>
+            <td>1.6.2</td>
+            <td>1.6.3</td>
+            <td>1.6.4</td>
+
+            <td>2.1.1</td>
+            <td>2.1.2</td>
+            <td>2.1.3</td>
+
+            <td>2.2.1</td>
+            <td>2.2.2</td>
+            <td>2.2.3</td>
+            <td>2.2.4</td>
+            <td>2.2.5</td>
+
+            <td>3.1.1</td>
+            <td>3.1.2</td>
+            <td>3.1.3</td>
+            <td>3.1.4</td>
+
+            <td>3.2.1</td>
+            <td>3.2.2</td>
+
+            <td>4.1.1</td>
+            <td>4.1.2</td>
+            <td>4.1.3</td>
+            <td>4.1.4</td>
+            <td>4.1.5</td>
+            <td>4.1.6</td>
+            <td>4.1.7</td>
+
+            <td>4.2.1</td>
+            <td>4.2.2</td>
+            <td>4.2.3</td>
+            <td>4.2.4</td>
+            <td>4.2.5</td>
+            <td>4.2.6</td>
+            <td>4.2.7</td>
+            <td>4.2.8</td>
+
+            <td>4.3.1</td>
+            <td>4.3.2</td>
+            <td>4.3.3</td>
+            <td>4.3.4</td>
+            <td>4.3.5</td>
+            <td>4.3.6</td>
+            <td>4.3.7</td>
+            <td>4.3.8</td>
+            <td>4.3.9</td>
+            <td>4.3.10</td>
+
+            <td>4.4.1</td>
+            <td>4.4.2</td>
+
+            <td>4.5.1</td>
+            <td>4.5.2</td>
+            <td>4.5.3</td>
+            <td>4.5.4</td>
+            <td>4.5.5</td>
+
+            <td>4.6.1</td>
+            <td>4.6.2</td>
+            <td>4.6.3</td>
+            <td>4.6.4</td>
+            <td>4.6.5</td>
+            <td>4.6.6</td>
+
+            <td>4.7.1</td>
+            <td>4.7.2</td>
+            <td>4.7.3</td>
+            <td>4.7.4</td>
+
+            <td>4.8.1</td>
+            <td>4.8.2</td>
+            <td>4.8.3</td>
+            <td>4.8.4</td>
+            <td>4.8.5</td>
+            <td>4.8.6</td>
+            <td>4.8.7</td>
+            <td>4.8.8</td>
+            <td>4.8.9</td>
+            <td>4.8.10</td>
+
+            <td>5.1.1</td>
+            <td>5.1.2</td>
+            <td>5.1.3</td>
+            <td>5.1.4</td>
+
+            <td>5.2.1</td>
+            <td>5.2.2</td>
+            <td>5.2.3</td>
+            <td>5.2.4</td>
+
+            <td>5.3.1</td>
+            <td>5.3.2</td>
+            <td>5.3.3</td>
+            <td>5.3.4</td>
+            <td>5.3.5</td>
+            <td>5.3.6</td>
+            <td>5.3.7</td>
+
+            <td>5.4.1</td>
+            <td>5.4.2</td>
+            <td>5.4.3</td>
+            <td>5.4.4</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% comment %}
+        {% for doc in data.sheet.0.questionnaire %}
+        <tr>
+            {% for answers in doc.get_list %}
+            <td class="text-nowrap">{{ answers }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        {% endcomment %}
+        
+        {% for doc in data %}
+        <tr>
+            {% for answers in doc.get_all_list %}
+            <td class="text-nowrap">{{ answers }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
