@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Destinations <small><a href='{% url "destinations:destination-create" %}'>Add</a></small></h2>
+{% for instance in object_list %}
+<p>{{ forloop.counter }} - <a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a> - <small><a href='{% url "destinations:destination-update" instance.id %}'>Edit</a> | <a href='{% url "destinations:destination-delete" instance.id %}'>Delete</a></small></p>
+{% empty %}
+<a href='{% url "destinations:destination-create" %}'>Add One</a>
+{% endfor %}
+
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ top_name }} | {{ block.super }}{% endblock title %}
+
+{# {% block breadcrumb %}hvd -> about{% endblock %} #}
+
+{% block header %}
+{{ block.super }}
+{% endblock header %}
+
+{% block banner %}
+      <div class="jumbotron text-dark rounded bg-light">
+            <center><h2 class="font-italic">{{ top_name }}</h2></center>
+      </div>
+{% endblock banner %}
+
+{% block content %}
+<div class="card-deck">
+    <div class="card border border-0">
+        {% with prefix|add:'_attractions' as link %}<a href="{% url link %}">{% endwith %}{% with 'img/destinations/'|add:prefix|add:'_attractions.jpg' as image_static %}
+            <img class="card-img-top" src="{% static image_static %}" alt="Card image cap"></a>{% endwith %}
+        <div class="card-body text-center">
+            <h5 class="card-title">Attractions</h5>
+        </div>
+    </div>
+
+    <div class="card border border-0">
+        {% with prefix|add:'_accommudation' as link %}<a href="{% url link %}">{% endwith %}{% with 'img/destinations/'|add:prefix|add:'_accommudation.jpg' as image_static %}
+            <img class="card-img-top" src="{% static image_static %}" alt="Card image cap"></a>{% endwith %}
+        <div class="card-body text-center">
+            <h5 class="card-title">Accommudation</h5>
+        </div>
+    </div>
+
+    <div class="card border border-0">
+        {% with prefix|add:'_tourguide' as link %}<a href="{% url link %}">{% endwith %}{% with 'img/destinations/'|add:prefix|add:'_tourguide.jpg' as image_static %}
+            <img class="card-img-top" src="{% static image_static %}" alt="Card image cap"></a>{% endwith %}
+        <div class="card-body text-center">
+            <h5 class="card-title">Tour Guide</h5>
+        </div>
+    </div>
+</div>
+{% endblock %}

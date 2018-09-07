@@ -10,15 +10,68 @@
 {% block content %}
 
 <div class="content">
-    {% for canvase_name in canvase_names %}
-    <canvas id="{{ canvase_name.name }}" width="800" height="600"></canvas>
+    {% for canvase_name, mean_percentage, progress_color in main_data %}
+    <div class="row" style="background-color:whitesmoke; margin:10px; padding:10px; border:1px solid grey;">
+        <!-- <div class="col-sm-8" style="background-color:yellow;"> -->
+        <div class="col-sm-8">
+            {#<canvas id="{{ canvase_name.name }}" width="800" height="600"></canvas>#}
+            <canvas id="{{ canvase_name.name }}"></canvas>
+        </div>
+        <!-- <div class="col-sm-4" style="background-color:orange;"> -->
+        <div class="col-sm-4" style="margin-top: 70px">
+            <table class="table" style="background-color:#ffff99; font-size:12px;">
+                <tbody>
+                    <tr>
+                        <th class="col-1">Experience</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar {{ progress_color.color.0 }}" role="progressbar" style="width: {{ mean_percentage.value.0 }}%" aria-valuenow="{{ mean_percentage.value.0 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Exclusive</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar {{ progress_color.color.1 }}" role="progressbar" style="width: {{ mean_percentage.value.1 }}%" aria-valuenow="{{ mean_percentage.value.1 }}" aria-valuemax="100"></div>
+                            </div>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Expertise</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar {{ progress_color.color.2 }}" role="progressbar" style="width: {{ mean_percentage.value.2 }}%" aria-valuenow="{{ mean_percentage.value.2 }}" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Exceptional</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar {{ progress_color.color.3 }}" role="progressbar" style="width: {{ mean_percentage.value.3 }}%" aria-valuenow="{{ mean_percentage.value.3 }}" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Excellence</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar {{ progress_color.color.4 }}" role="progressbar" style="width: {{ mean_percentage.value.4 }}%" aria-valuenow="{{ mean_percentage.value.4 }}" aria-valuemax="100"></div>
+                            </div>    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     {% endfor %}
 </div>
 
 {% endblock %}
 
 {% block js_extend %}
-    <script src="{% static 'js/Chart.bundle.min.js' %}"></script>
+<script src="{% static 'js/Chart.bundle.min.js' %}"></script>
 
-    {% include 'includes/radarscript.html' %}
+{% include 'includes/radarscript.html' %}
 {% endblock %}

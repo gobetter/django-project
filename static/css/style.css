@@ -4,7 +4,14 @@
     margin-right:auto;
     margin-left:auto
  }
- 
+
+ .jumbotron {
+    /* min-height: 10px; */
+    padding-top: 0;
+    padding-bottom: 0;
+    /* padding: 5em inherit; */
+}
+
  .hvd-header {
     /* width: 80%; */
   line-height: 1;

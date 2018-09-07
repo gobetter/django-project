@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand" href="{{ '/' }}">HVD</a>
+    <!-- <a class="navbar-brand" href="{{ '/' }}">HVD</a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,37 +8,52 @@
         <ul class="navbar-nav mr-auto">
             {% with url_name=request.resolver_match.url_name %}
             <li class="nav-item {% if url_name == 'home' %}active{% endif %}">
-                <a class="nav-link" href="{{ '/' }}">Home</a>
+                <!-- <a class="nav-link" href="{{ '/' }}">Home</a> -->
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% if url_name == 'data_tourguide' or url_name == 'data_accommudation' or url_name == 'data_cultural' %}active{% endif %}" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item {% if url_name == 'data_tourguide' %}active{% endif %}" href="{{ '/data_tourguide' }}">Tour Guide</a>
-                    <a class="dropdown-item {% if url_name == 'data_accommudation' %}active{% endif %}" href="{{ '/data_accommudation' }}">Accommudation</a>
-                    <a class="dropdown-item {% if url_name == 'data_cultural' %}active{% endif %}" href="{{ '/data_cultural' }}">Cultural</a>
+                <a class="nav-link dropdown-toggle {% if url_name == 'top_experience' or url_name == 'top_exclusive' or url_name == 'top_expertise' or url_name == 'top_exceptional' or url_name == 'top_excellence' %}active{% endif %}" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Top Destinations</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                    <!-- <a class="dropdown-item {% if url_name == 'top_experience' %}active{% endif %}" href="{{ '/top_experience' }}">Top Experience</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'top_experience' %}active{% endif %}" href="{{ '/top_experience' }}">Top Experience</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'top_exclusive' %}active{% endif %}" href="{{ '/top_exclusive' }}">Top Exclusive</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'top_expertise' %}active{% endif %}" href="{{ '/top_expertise' }}">Top Expertise</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'top_exceptional' %}active{% endif %}" href="{{ '/top_exceptional' }}">Top Exceptional</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'top_excellence' %}active{% endif %}" href="{{ '/top_excellence' }}">Top Excellence</a> -->
+
+                    <a class="dropdown-item {% if url_name == 'top_experience' %}active{% endif %}" href="{% url 'top_experience' %}">Top Experience</a>
+                    <a class="dropdown-item {% if url_name == 'top_exclusive' %}active{% endif %}" href="{% url 'top_exclusive' %}">Top Exclusive</a>
+                    <a class="dropdown-item {% if url_name == 'top_expertise' %}active{% endif %}" href="{% url 'top_expertise' %}">Top Expertise</a>
+                    <a class="dropdown-item {% if url_name == 'top_exceptional' %}active{% endif %}" href="{% url 'top_exceptional' %}">Top Exceptional</a>
+                    <a class="dropdown-item {% if url_name == 'top_excellence' %}active{% endif %}" href="{% url 'top_excellence' %}">Top Excellence</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% if url_name == 'radar_individual_tourguide' or url_name == 'radar_individual_accommudation' or url_name == 'radar_individual_cultural' %}active{% endif %}" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Radar Charts (Separated)</a>
+                <a class="nav-link dropdown-toggle {% if url_name == 'radar_individual_tourguide' or url_name == 'radar_individual_accommudation' or url_name == 'radar_individual_cultural' %}active{% endif %}" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Assessment</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item {% if url_name == 'radar_individual_tourguide' %}active{% endif %}" href="{{ '/radar_individual_tourguide' }}">Tour Guide</a>
-                    <a class="dropdown-item {% if url_name == 'radar_individual_accommudation' %}active{% endif %}" href="{{ '/radar_individual_accommudation' }}">Accommudation</a>
-                    <a class="dropdown-item {% if url_name == 'radar_individual_cultural' %}active{% endif %}" href="{{ '/radar_individual_cultural' }}">Cultural</a>
+                    <!-- <a class="dropdown-item {% if url_name == 'radar_individual_cultural' %}active{% endif %}" href="{{ '/radar_individual_cultural' }}">Cultural Attraction</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'radar_individual_natural' %}active{% endif %} disabled" href="{{ '/radar_individual_natural' }}">Natural Attraction</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'radar_individual_recreational' %}active{% endif %} disabled" href="{{ '/radar_individual_recreational' }}">Recreational Attraction</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'radar_individual_accommudation' %}active{% endif %}" href="{{ '/radar_individual_accommudation' }}">Accommudation</a> -->
+                    <!-- <a class="dropdown-item {% if url_name == 'radar_individual_tourguide' %}active{% endif %}" href="{{ '/radar_individual_tourguide' }}">Tour Guide</a> -->
+
+                    <a class="dropdown-item {% if url_name == 'radar_individual_cultural' %}active{% endif %}" href="{% url 'radar_individual_cultural' %}">Cultural Attraction</a>
+                    <a class="dropdown-item {% if url_name == 'radar_individual_natural' %}active{% endif %} disabled" href="{% url 'radar_individual_natural' %}">Natural Attraction</a>
+                    <a class="dropdown-item {% if url_name == 'radar_individual_recreational' %}active{% endif %} disabled" href="{% url 'radar_individual_recreational' %}">Recreational Attraction</a>
+                    <a class="dropdown-item {% if url_name == 'radar_individual_accommudation' %}active{% endif %}" href="{% url 'radar_individual_accommudation' %}">Accommudation</a>
+                    <a class="dropdown-item {% if url_name == 'radar_individual_tourguide' %}active{% endif %}" href="{% url 'radar_individual_tourguide' %}">Tour Guide</a>
                 </div>
+            </li>
+            <li class="nav-item {% if url_name == 'questionnaires' %}active{% endif %}">
+                <a class="nav-link" href="#">Questionnaires</a>
             </li>
             <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% if url_name == 'radar_all_tourguide' or url_name == 'radar_all_accommudation' or url_name == 'radar_all_cultural' %}active{% endif %}" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Radar Charts (All)</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item {% if url_name == 'radar_all_tourguide' %}active{% endif %}" href="{{ '/radar_all_tourguide' }}">Tour Guide</a>
-                    <a class="dropdown-item {% if url_name == 'radar_all_accommudation' %}active{% endif %}" href="{{ '/radar_all_accommudation' }}">Accommudation</a>
-                    <a class="dropdown-item {% if url_name == 'radar_all_cultural' %}active{% endif %}" href="{{ '/radar_all_cultural' }}">Cultural</a>
-                </div>
-            </li>
-                <a class="nav-link" href="{{ '/about' }}">About</a>
+                <!-- <a class="nav-link" href="{{ '/about' }}">About</a> -->
+                <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
-                <a class="nav-link" href="{{ '/contact' }}">Contact</a>
+                <!-- <a class="nav-link" href="{{ '/contact' }}">Contact</a> -->
+                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
             </li>
             {% endwith %}
         </ul>
@@ -48,3 +63,6 @@
         <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
     </div>
 </nav>
+
+
+

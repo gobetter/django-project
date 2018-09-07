@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ object.title }}</h2>
+<p>{{ object.content }}</p>
+<p>{{ object.timestamp }}, Updated {{ object.updated|timesince }} ago</p>
+{% endblock content %}

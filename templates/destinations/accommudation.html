@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ accommudation_name }} | {{ block.super }}{% endblock title %}
+
+{# {% block breadcrumb %}hvd -> about{% endblock %} #}
+
+{% block header %}
+{{ block.super }}
+{% endblock header %}
+
+{% block banner %}
+{% endblock banner %}
+
+{% block content %}
+{{ accommudation_name }}
+{% endblock %}
